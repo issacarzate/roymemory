@@ -10,7 +10,7 @@ export class UserGuard implements CanActivate  {
     if(localStorage.getItem('currentUser')){
       return true
     }
-    // this.router.navigate(['/Home'], { queryParams: { returnUrl: state.url}})
+    this.router.navigate(['/Home'], { queryParams: { returnUrl: state.url}})
     return false
   }
 

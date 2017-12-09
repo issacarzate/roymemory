@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders }  from '@angular/core';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
-import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+import { ListaFacturasComponent } from './components/lista-facturas/lista-facturas.component';
 import { UserGuard } from './guards/user.guard'
 
 const appRoutes: Routes = [

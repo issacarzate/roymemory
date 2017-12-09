@@ -7,7 +7,7 @@ import { BrowserXhr, Http, HttpModule, ReadyState, RequestOptions, XHRBackend, X
 
 import { AppComponent } from './app.component';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
-import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+import { ListaFacturasComponent } from './components/lista-facturas/lista-facturas.component';
 
 import { UserGuard } from './guards/user.guard';
 import { routing, appRoutingProviders }  from './app.routing';
