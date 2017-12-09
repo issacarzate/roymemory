@@ -7,20 +7,25 @@ import { BrowserXhr, Http, HttpModule, ReadyState, RequestOptions, XHRBackend, X
 
 import { AppComponent } from './app.component';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
+import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
 
+import { UserGuard } from './guards/user.guard';
+import { routing, appRoutingProviders }  from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogincomponentComponent
+    LogincomponentComponent,
+    ListaFacturasComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
-  providers: [],
+  providers: [appRoutingProviders, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,27 @@
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders }  from '@angular/core';
+import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
+import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+import { UserGuard } from './guards/user.guard'
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/Home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'Home',
+    component: LogincomponentComponent
+  },
+  {
+    path: 'listado',
+    component:ListaFacturasComponent,
+    canActivate: [UserGuard]
+  }
+];
+
+export const appRoutingProviders: any[] = [
+];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

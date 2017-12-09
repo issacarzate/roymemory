@@ -12,7 +12,7 @@ export class AuthenticationService {
     console.log("login auth: ", user)
     // var User = {rfc: "123", password: "123"}
     // if(user === User) return User
-    return this.http.post('ip/v1/user/', user)//cambiar el url para que sirva para el proyecto
+    return this.http.post('http://104.236.84.230:7080/v1/auth', user)//cambiar el url para que sirva para el proyecto
 
       .map((response: Response) =>  {
         console.log(response)

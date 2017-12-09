@@ -31,9 +31,5 @@ public currentUser:any;
             console.error("error: ", error)
             console.log("A la verga");
           });
-}
-
-
-
-
+        }
 }
