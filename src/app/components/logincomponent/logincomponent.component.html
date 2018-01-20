@@ -1,7 +1,24 @@
 <div class="login-page">
   <div class="form">
-      <input type="text" placeholder="rfc" [(ngModel)]="user"/>
-      <input type="password" placeholder="password" [(ngModel)]="password"/>
+      <input class="form-control" type="text" placeholder="rfc" [(ngModel)]="user" required/>
+      <input class="form-control" type="password" placeholder="password" [(ngModel)]="password" required/>
       <button (click)="login(user,password)">login</button>
   </div>
+  <div class="wrapper">
+    <button mat-raised-button (click)="openDialog()">Olvidé la contraseña</button>
+  </div>
 </div>
+
+
+
+
+<!-- <div class="login-page">
+  <div class="form">
+    <ul>
+        <li *ngFor="let hero of heroes">
+          {{ hero }}
+          <button (click)="download()">download </button>
+        </li>
+      </ul>
+  </div>
+</div> -->

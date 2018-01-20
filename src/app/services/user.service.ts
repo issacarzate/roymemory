@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import { catchError, map, tap } from 'rxjs/operators'
 import 'rxjs/add/operator/map';
 import { User} from '../interfaces/user';
 
@@ -10,6 +11,18 @@ export class UserService {
 
   constructor(private _http: Http){}
 
+  updateUser(user)  {
+    console.log(":v ", user)
+    return this._http.post('http://104.236.84.230:7080/v1/users/', user)
+          .pipe(
+            tap(hola => console.log("hola"),
+            catchError(error => console.log("error")))
+          )
+      // .map(response =>  {
+      //   console.log("actualizado: ", response)
+      //   return response.json()
+      // })
+  }
 
   getUsers(){
     return this._http.get(this.url)
@@ -63,12 +76,12 @@ export class UserService {
     .map(res => res.json());
   }
 
-  updateUsers(user: User, term: string){
-    var headers = new Headers ();
-    headers.append('Content-Type','application/json');
-    return this._http.put(this.url+"/"+term, user, {headers: headers})
-    .map(res => res.json());
-  }
+  // updateUsers(user: User, term: string){
+  //   var headers = new Headers ();
+  //   headers.append('Content-Type','application/json');
+  //   return this._http.put(this.url+"/"+term, user, {headers: headers})
+  //   .map(res => res.json());
+  // }
   private jwt() {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     if(currentUser && currentUser.token)  {
