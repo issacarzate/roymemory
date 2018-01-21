@@ -16,6 +16,12 @@ export class ListaService {
       console.log(":v_ ", res)
       return res.json()})
   }
+  obtenerFacturaUnica(file) {
+    return this.http.get(`http://104.236.84.230:7080/v1/file/${file}`)
+    .map(res =>  {
+      console.log(":v_ ", res)
+      return res.json()})
+  }
 
 
 

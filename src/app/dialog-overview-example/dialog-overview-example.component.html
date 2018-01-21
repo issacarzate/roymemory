@@ -1,10 +1,13 @@
 <ol>
-  <li>
+
     <mat-form-field>
-      <input matInput [(ngModel)]="mail" placeholder="Ingresa tu correo" required>
+      <input matInput type="email" [(ngModel)]="mail" placeholder="Ingresa tu correo" required>
     </mat-form-field>
-  </li>
+    <mat-form-field>
+      <input matInput type="password" [(ngModel)]="password" placeholder="Ingresa tu contraseña" required>
+    </mat-form-field>
+
 </ol>
 <mat-dialog-actions>
-  <button mat-raised-button (click)="enviar(mail)">Enviar</button>
+  <button mat-raised-button (click)="enviar(mail, password)">Enviar</button>
 </mat-dialog-actions>

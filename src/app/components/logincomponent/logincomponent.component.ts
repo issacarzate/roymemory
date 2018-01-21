@@ -77,8 +77,8 @@ public currentUser:any;
       .subscribe(
           data => {
               let serveruser = data
-              // this.currentUser=JSON.parse(localStorage.getItem('currentUser'));
-              // let user = JSON.parse(localStorage.getItem('currentUser'));
+              this.currentUser=JSON.parse(localStorage.getItem('currentUser'));
+              let user = JSON.parse(localStorage.getItem('currentUser'));
               //this.router.navigate(["listado"])
               console.log("ServerUser: ", serveruser)
               if (!serveruser.email) {

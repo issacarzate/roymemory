@@ -1,10 +1,12 @@
 <div class="login-page">
-  <div class="form">
-    <ul>
-        <li *ngFor="let hero of heroes">
-          {{ hero.filename }}
-          <button (click)="download()">download </button>
-        </li>
-      </ul>
+  <div class="formm">
+    <mat-list>
+      <mat-list-item *ngFor="let hero of heroes">
+        {{ hero.filename }}
+        <p></p>
+        <button  (click)="dowloadUnique(hero.filename)">Descargar</button>
+        <mat-divider [inset]="true"></mat-divider>
+      </mat-list-item>
+    </mat-list>
   </div>
 </div>
