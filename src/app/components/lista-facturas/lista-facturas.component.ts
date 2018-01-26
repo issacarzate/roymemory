@@ -46,9 +46,149 @@ export class ListaFacturasComponent implements OnInit {
       .subscribe(
         data => {
            console.log(data);
+           var doc = new jsPDF();
+           doc.setFontType("bolditalic");
+           doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
+           doc.setFont("courier");
+           doc.setFontType("normal");
+           doc.text(20, 30, 'Oficina Matriz');
+           doc.text(20, 35, 'Sevilla No. 16-A');
+           doc.text(20, 40, 'Colonia Juarez');
+           doc.text(20, 45, 'Delegación, Cuahutémoc');
+           doc.text(20, 50, 'CDMX');
+           doc.text(20, 55, 'C.P. 06600');
+           doc.text(20, 60, 'Tel. (55)5999-4196');
+           doc.text(20, 65, 'RFC: CME090507SE2');
+
+           doc.text(120, 30, 'LUGAR DE EXPEDICION:');
+           doc.text(120, 35, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['calle'] + "   "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['noExterior']);
+           doc.text(120, 40, data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['calle'] + " #"+ data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['noExterior']);
+           doc.text(120, 45, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['colonia'] + "  "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['localidad']);
+           doc.text(120, 55, "C.P: " +  data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['codigoPostal'] + "  Tel 59994196");
+
+
+           doc.setFont("times");
+           doc.setFontType("normal");
+           doc.text(20, 75, 'FECHA DE EXPEDICIÓN');
+           doc.text(120, 75, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+           doc.text(20, 80, 'COMPROBANTE FISCAL DIGITAL');
+           doc.text(120, 80, 'FACTURA');
+
+           doc.setFontType("normal");
+           doc.setFontSize(20);
+           doc.text(20, 88, 'Factura');
+           doc.setFontType("bold");
+           doc.setFontSize(25);
+           doc.text(20, 98, data['$']['serie'] + " " + data['$']['folio'] );
+
+           doc.setFontType("bolditalic");
+           doc.setFontSize(20);
+           doc.text(105, 108, 'Datos Fiscales del Cliente', null, null, 'center');
+
+           doc.setFont("courier");
+           doc.setFontSize(12);
+           doc.setFontType("normal");
+           doc.text(20, 115, '#Cliente:');
+           doc.text(20, 120, 'R.F.C:');
+           doc.text(20, 125, 'Nombre:');
+           doc.text(20, 130, 'Domicilio:');
+           doc.text(20, 135, 'Colonia:');
+           doc.text(20, 140, 'Número:');
+           doc.text(20, 145, 'C.P.:');
+           doc.text(20, 150, 'País:');
+           doc.text(20, 155, 'Ciudad:');
+           doc.text(20, 160, 'Método de pago:');
+
+           doc.setFontType("normal");
+           //Que es este numero
+           doc.text(80, 115, 'F2542:');
+           doc.text(80, 120, data['cfdi:Receptor'][0]['$']['rfc']);
+           doc.text(80, 125, data['cfdi:Receptor'][0]['$']['nombre']);
+           doc.text(80, 130, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['calle']);
+           doc.text(80, 135, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['colonia']);
+           //porqueno hay
+           doc.text(80, 140, '26 PTE');
+           doc.text(80, 145, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['codigoPostal']);
+           doc.text(80, 150, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['pais']);
+           doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
+           //cuantos metodos de pago hay
+           doc.text(80, 160, data['$']['metodoDePago'] + " " + "Efectivo");
+
+           doc.setFontType("bold");
+           doc.text(10, 170, 'Cantidad');
+           doc.text(70, 170, 'Descripción');
+           doc.text(130, 170, 'P. Unitario');
+           doc.text(170, 170, 'Importe');
+
+
+           doc.addPage();
+           doc.setFontType("bold");
+           doc.text(20, 30, 'Cantidad con letra:');
+           doc.setFontSize(10);
+           //Checar cantidad con letra
+           doc.text(20, 35, 'Ochocientos cuarenta y dos pesos 00/100');
+           doc.setFontSize(12);
+           doc.text(120, 30, 'Sub-Total:');
+           doc.text(150, 30, data['$']['subTotal']);
+           doc.text(120, 35, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['impuesto'] + " " + data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['tasa'] + "%");
+           doc.text(150, 35, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['importe']);
+           doc.text(120, 40, 'Total:');
+           doc.text(150, 40, data['$']['total']);
+           doc.text(120, 45, 'Piezas:');
+           //Donde esta la cantidad
+           doc.text(150, 45, data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']['cantidad']);
+
+
+
+           doc.text(15, 55,'SELLO DIGITAL DEL EMISOR');
+           doc.setFontType("normal");
+           var textLines = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD'], 90);
+           doc.text(textLines, 15, 60);
+
+           //Como se genera
+           doc.setFontType("bold");
+           doc.text(110, 55,'SELLO DIGITAL DEL SAT');
+           doc.setFontType("normal");
+           var textLines2 = doc.splitTextToSize("||"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['version']+"|"+ data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']  +"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']+"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD']+"||", 90);
+           doc.text(textLines2, 110, 60);
+
+
+           doc.setFontType("bold");
+           doc.text(15, 115,'SELLO DIGITAL DEL SAT');
+           doc.setFontType("normal");
+           var textLines3 = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloSAT'], 90);
+           doc.text(textLines3, 15, 120);
+
+
+
+
+           doc.setFontSize(10);
+           doc.setFontType("bold");
+           doc.text(15, 160, 'Folio Fiscal:');
+           doc.text(15, 165, 'Fecha y Hora de Certificación:');
+           doc.text(15, 170, 'No de Serie del Certificado del SAT:');
+           doc.text(15, 175, 'No de Serie del Certificado del Contribuyente:');
+           doc.text(15, 190, 'Timbre Fiscal Digital');
+           doc.text(70, 230, 'Nombre, Firma, Fecha___________________________________');
+
+           doc.setFontType("normal");
+           doc.text(120, 160, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']);
+           doc.text(120, 165, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+           doc.text(120, 170, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['noCertificadoSAT']);
+           doc.text(120, 175, data['$']['noCertificado']);
+
+
+           doc.setFontType("bold");
+           doc.text(15, 270, 'ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI');
+           doc.text(15, 275, 'DESCARGA TU FACTURA ELECTRÓNICA EN:');
+           doc.text(15, 280, 'WWW.ROYMEMORY.COM');
+
+
+           doc.save('Test.pdf');
+             console.log(data['cfdi:Emisor'][0]['$']['nombre']);
          },
          error => console.error("error: ", error)
-       );        
+       );
   }
 
   download() {
@@ -90,7 +230,7 @@ doc.text(20, 88, 'Factura');
 doc.setFontType("bold");
 doc.setFontSize(25);
 doc.text(20, 98, 'A 18278');
-
+//todavia no
 doc.setFontType("normal");
 doc.setFontSize(20);
 doc.text(70, 88, 'Remision');
