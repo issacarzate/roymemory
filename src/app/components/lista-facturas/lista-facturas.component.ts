@@ -17,8 +17,10 @@ import * as jsPDF from 'jspdf'
   providers: [ListaService]
 })
 export class ListaFacturasComponent implements OnInit {
-  heroes = new Array()
+  files = new Array()
   facturas = [];
+  usuario: string = "nulo";
+
 
   static location: Location
   public currentUser:any;
@@ -27,13 +29,20 @@ export class ListaFacturasComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
+    this.getFiles()
+  }
+
+  getFiles()  {
     let user = JSON.parse(localStorage.getItem('currentUser'));
     console.log(user.rfc);
+    this.usuario =  user.name;
     this._httpListaService.obtenerFactura(user.rfc)
       .subscribe(
         data => {
-          data[0]['files'].forEach((file, i) =>  {
-            this.heroes.push(file)
+          console.log("dataaaa: ", data['files'])
+          data['files'].forEach((file, i) =>  {
+            console.log("file: ", file)
+            this.files.push(file)
             // console.log(`File ${i} = ${JSON.stringify(files)}`)
           })
         },
@@ -41,11 +50,29 @@ export class ListaFacturasComponent implements OnInit {
       );
   }
 
+  logout() {
+    localStorage.removeItem('currentUser')
+    this.router.navigate([""]);
+        }
+
   dowloadUnique(file){
+  let   metodoDePago1: string = "nulo";
+
     this._httpListaService.obtenerFacturaUnica(file)
       .subscribe(
         data => {
-           console.log(data);
+          //validaciones
+          //terminar facturas
+          //numero a letras
+          //modal olvide la contraseña
+
+
+          //tabla
+          // multiples archivos
+
+           console.log("hey: ",data);
+           let user = JSON.parse(data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']);
+           console.log("Articulos: " , user);
            var doc = new jsPDF();
            doc.setFontType("bolditalic");
            doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
@@ -98,9 +125,17 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(20, 150, 'País:');
            doc.text(20, 155, 'Ciudad:');
            doc.text(20, 160, 'Método de pago:');
+           doc.text(20, 165, 'Forma de pago:');
+           doc.text(80, 165, 'Una sola exhibición');
 
            doc.setFontType("normal");
            //Que es este numero
+           //agregar uso cfdi
+           //g01 -  Adquisicion de mercancias
+           //g02 - Devoluciones descuentos o bonificaciones
+           //g03 - gastos en general
+           //p01 - por definir
+
            doc.text(80, 115, 'F2542:');
            doc.text(80, 120, data['cfdi:Receptor'][0]['$']['rfc']);
            doc.text(80, 125, data['cfdi:Receptor'][0]['$']['nombre']);
@@ -110,9 +145,27 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(80, 140, '26 PTE');
            doc.text(80, 145, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['codigoPostal']);
            doc.text(80, 150, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['pais']);
-           doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
+           // doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
            //cuantos metodos de pago hay
-           doc.text(80, 160, data['$']['metodoDePago'] + " " + "Efectivo");
+           if(data['$']['metodoDePago']=="01"){
+           metodoDePago1 = "Efectivo"
+          }
+          if(data['$']['metodoDePago']=="02"){
+          metodoDePago1 = "Cheque Nominativo"
+          }
+           if(data['$']['metodoDePago']=="03"){
+           metodoDePago1 = "Transferencia electrónica de fondos"
+          }
+          if(data['$']['metodoDePago']=="04"){
+          metodoDePago1 = "Tarjeta de credito"
+          }
+          if(data['$']['metodoDePago']=="28"){
+          metodoDePago1 = "Tarjeta de debito"
+          }
+          if(data['$']['metodoDePago']=="99"){
+          metodoDePago1 = "por definir"
+          }
+           doc.text(80, 160, data['$']['metodoDePago'] + " " + metodoDePago1);
 
            doc.setFontType("bold");
            doc.text(10, 170, 'Cantidad');

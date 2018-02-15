@@ -96,6 +96,10 @@
     position: absolute;
     top: 50%;
 }
+img{
+  padding-left:60px;
+  padding-bottom:10px;
+}
 body {
   background: #76b852; /* fallback for old browsers */
   background: -webkit-linear-gradient(right, #76b852, #8DC26F);

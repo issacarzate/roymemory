@@ -1,10 +1,16 @@
+<div class="topnav">
+  <a class="active">Bienvenido: </a>
+
+  <a class="blanco">{{usuario}}</a>
+</div>
+  <a ><button mat-raised-button class="matboton" (click)="logout()">Salir</button></a>
 <div class="login-page">
   <div class="formm">
     <mat-list>
-      <mat-list-item *ngFor="let hero of heroes">
-        {{ hero.filename }}
+      <mat-list-item *ngFor="let file of files">
+        {{ file.filename }}
         <p></p>
-        <button  (click)="dowloadUnique(hero.filename)">Descargar</button>
+        <button  (click)="dowloadUnique(file.filename)">Descargar</button>
         <mat-divider [inset]="true"></mat-divider>
       </mat-list-item>
     </mat-list>

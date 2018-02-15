@@ -11,7 +11,7 @@ export class ListaService {
 
 
   obtenerFactura(rfc)  {
-    return this.http.get('http://104.236.84.230:7080/v1/users/', rfc)
+    return this.http.get(`http://104.236.84.230:7080/v1/users/${rfc}`)
     .map(res =>  {
       console.log(":v_ ", res)
       return res.json()})
