@@ -18,6 +18,7 @@ import * as jsPDF from 'jspdf'
 })
 export class ListaFacturasComponent implements OnInit {
   files = new Array()
+  articulos = new Array();
   facturas = [];
   usuario: string = "nulo";
 
@@ -71,8 +72,12 @@ export class ListaFacturasComponent implements OnInit {
           // multiples archivos
 
            console.log("hey: ",data);
-           let user = JSON.parse(data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']);
-           console.log("Articulos: " , user);
+           console.log("Articulos: " , data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']);
+           data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$'].forEach((articulo, i) =>  {
+             console.log("articulo: ", articulo)
+             this.articulos.push(articulo)
+             // console.log(`File ${i} = ${JSON.stringify(files)}`)
+           })
            var doc = new jsPDF();
            doc.setFontType("bolditalic");
            doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
