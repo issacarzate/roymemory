@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DialogOverviewExampleComponent} from '../../dialog-overview-example/dialog-overview-example.component';
+import {OlvidePasswordComponent} from '../../olvide-password/olvide-password.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
@@ -40,11 +41,24 @@ public currentUser:any;
       data: user
     });
 
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
     });
   }
+
+  openPasswordDialog() {
+    let dialogRef = this.dialog.open(OlvidePasswordComponent, {
+      width: '350px'
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
 
 
