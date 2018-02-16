@@ -58,6 +58,7 @@ export class ListaFacturasComponent implements OnInit {
 
   dowloadUnique(file){
   let   metodoDePago1: string = "nulo";
+  let contador1: number = 0;
 
     this._httpListaService.obtenerFacturaUnica(file)
       .subscribe(
@@ -70,15 +71,24 @@ export class ListaFacturasComponent implements OnInit {
 
           //tabla
           // multiples archivos
+          var doc = new jsPDF();
 
            console.log("hey: ",data);
-           console.log("Articulos: " , data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']);
-           data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$'].forEach((articulo, i) =>  {
+           //console.log("Articulos: " , data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']);
+           data['cfdi:Conceptos'][0]['cfdi:Concepto'].forEach((articulo, i) =>  {
              console.log("articulo: ", articulo)
              this.articulos.push(articulo)
-             // console.log(`File ${i} = ${JSON.stringify(files)}`)
+             //console.log(`Articulo ${i} = ${JSON.stringify(articulo)}`);
+             doc.setFontType("normal");
+             doc.text(10, (175+contador1), Math.round(parseFloat(JSON.parse(JSON.stringify(articulo['$']['cantidad'])))).toString());
+             doc.setFontSize(8);
+             doc.text(33, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['descripcion'])));
+             doc.setFontSize(12);
+             doc.text(130, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['valorUnitario'])));
+             doc.text(170, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['importe'])));
+             contador1 = contador1 + 5;
            })
-           var doc = new jsPDF();
+
            doc.setFontType("bolditalic");
            doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
            doc.setFont("courier");
@@ -104,7 +114,6 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(20, 75, 'FECHA DE EXPEDICIÓN');
            doc.text(120, 75, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
            doc.text(20, 80, 'COMPROBANTE FISCAL DIGITAL');
-           doc.text(120, 80, 'FACTURA');
 
            doc.setFontType("normal");
            doc.setFontSize(20);
@@ -177,6 +186,16 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(70, 170, 'Descripción');
            doc.text(130, 170, 'P. Unitario');
            doc.text(170, 170, 'Importe');
+
+           //doc.setFontType("normal");
+           //doc.text(10, 176, '1');
+           //doc.setFontSize(8);
+           //doc.text(33, 176, 'AA10050-5V-CGD 655 10050MAH DOBLE USB METAL DOR');
+           //doc.setFontSize(12);
+           //doc.text(130, 176, '362.93');
+          // doc.text(170, 176, '362.93');
+
+
 
 
            doc.addPage();
