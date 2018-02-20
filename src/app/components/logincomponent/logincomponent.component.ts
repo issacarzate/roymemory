@@ -7,7 +7,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DialogOverviewExampleComponent} from '../../dialog-overview-example/dialog-overview-example.component';
 import {OlvidePasswordComponent} from '../../olvide-password/olvide-password.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
+import {MatSnackBar} from '@angular/material';
 
 import * as jsPDF from 'jspdf';
 
@@ -30,7 +30,8 @@ public currentUser:any;
   constructor(private _httpAuthService:AuthenticationService,
               private router: Router,
               @Inject('Window') private window: Window,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              public snackBar: MatSnackBar
               ) {}
 
   ngOnInit() {}
@@ -40,11 +41,15 @@ public currentUser:any;
       width: '350px',
       data: user
     });
-
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.animal = result;
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 
@@ -58,10 +63,6 @@ public currentUser:any;
       console.log('The dialog was closed');
     });
   }
-
-
-
-
 
   mailUpdate(correo){
     let user2 = JSON.parse(localStorage.getItem('currentUser'));
@@ -91,19 +92,23 @@ public currentUser:any;
       .subscribe(
           data => {
               let serveruser = data
+              this.currentUser = (JSON.parse(localStorage.getItem('currentUser'))) ? JSON.parse(localStorage.getItem('currentUser')) : null
               this.currentUser=JSON.parse(localStorage.getItem('currentUser'));
-              let user = JSON.parse(localStorage.getItem('currentUser'));
               //this.router.navigate(["listado"])
               console.log("ServerUser: ", serveruser)
-              if (!serveruser.email) {
+              console.log("hey: ", this.currentUser)
+              if (this.currentUser && !this.currentUser.email) {
                    console.log("No hay Correo");
                    this.openDialog(serveruser);
-                } else {
+                } else if (this.currentUser && this.currentUser.email) {
                    console.log("Si hay correo");
                    this.router.navigate(["listado"])
+                } else {
+                  this.openSnackBar("Usuario Incorrecto", "Cerrar");
                 }
           },
           error => {
+            this.openSnackBar("Usuario Incorrecto", "Cerrar");
             console.error("error: ", error)
             console.log("A la verga");
           });

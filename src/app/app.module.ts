@@ -53,6 +53,7 @@ import {
 } from '@angular/material';
 import { DialogOverviewExampleComponent } from './dialog-overview-example/dialog-overview-example.component';
 import {CdkTableModule} from '@angular/cdk/table';
+import { ForgottenComponent } from './forgotten/forgotten.component';
 
 
 @NgModule({
@@ -88,8 +89,7 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
-  ]
+    MatTooltipModule,]
 })
 export class DemoMaterialModule {}
 
@@ -100,7 +100,8 @@ export class DemoMaterialModule {}
     ListaFacturasComponent,
     PrimeraVezComponent,
     DialogOverviewExampleComponent,
-    OlvidePasswordComponent
+    OlvidePasswordComponent,
+    ForgottenComponent
     ],
     entryComponents: [
     DialogOverviewExampleComponent,

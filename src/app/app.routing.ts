@@ -3,6 +3,8 @@ import { ModuleWithProviders }  from '@angular/core';
 import { LogincomponentComponent } from './components/logincomponent/logincomponent.component';
 import { ListaFacturasComponent } from './components/lista-facturas/lista-facturas.component';
 import { UserGuard } from './guards/user.guard'
+import { ForgottenComponent } from './forgotten/forgotten.component';
+
 
 const appRoutes: Routes = [
   {
@@ -18,6 +20,10 @@ const appRoutes: Routes = [
     path: 'listado',
     component:ListaFacturasComponent,
     canActivate: [UserGuard]
+  },
+  {
+    path: 'forgotten',
+    component: ForgottenComponent
   }
 ];
 

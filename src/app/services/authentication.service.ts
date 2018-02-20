@@ -14,12 +14,24 @@ export class AuthenticationService {
       .map((response: Response) =>  {
         console.log(response)
         //inicia sesión
-        let user = response.json()
-        //almacena el usuario
-        if(user && user.token)  localStorage.setItem('currentUser', JSON.stringify(user))
-        localStorage.setItem('currentUser', JSON.stringify(user))
-        console.log(localStorage.getItem('currentUser'))
-        return user
+        let userdata = response.json()
+        if(user && user.rfc && user.password &&
+           userdata && userdata.password &&
+           user.rfc == userdata.rfc &&
+           user.password == userdata.password)  {
+             console.log("1")
+             localStorage.setItem('currentUser', JSON.stringify(userdata))}
+        else if(user && user.rfc && user.password &&
+           userdata && !userdata.password &&
+           user.rfc == userdata.rfc &&
+           user.password == userdata.rfc)  {
+             console.log("2")
+             localStorage.setItem('currentUser', JSON.stringify(userdata))}
+        if(localStorage.getItem('currentUser')) {
+           console.log("localStorage: ",localStorage.getItem('currentUser'))
+           return userdata
+        }
+
       })
 
   }

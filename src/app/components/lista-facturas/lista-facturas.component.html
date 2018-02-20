@@ -8,7 +8,10 @@
   <div class="formm">
     <mat-list>
       <mat-list-item *ngFor="let file of files">
-        {{ file.filename }}
+        Folio: {{ file.folio }} /
+        Fecha: {{ file.date | date : format : timezone }}
+        <br>
+        Total: {{ file.total }}
         <p></p>
         <button  (click)="dowloadUnique(file.filename)">Descargar</button>
         <mat-divider [inset]="true"></mat-divider>
