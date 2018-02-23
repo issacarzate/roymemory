@@ -3,11 +3,14 @@ import { Location } from '@angular/common';
 import { User } from "./../../interfaces/user";
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import '../../services/numeros.js';
 import { ListaService } from '../../services/lista.service';
 
 import * as xml2js from 'xml2js';
 
 import * as jsPDF from 'jspdf'
+
+declare var numeroALetras: any;
 
 
 @Component({
@@ -31,6 +34,12 @@ export class ListaFacturasComponent implements OnInit {
 
   ngOnInit() {
     this.getFiles()
+  }
+
+  conversor(numero){
+    numeroALetras.Unidades(numero);
+    //console.log(numext);
+    //return numext;
   }
 
   getFiles()  {
