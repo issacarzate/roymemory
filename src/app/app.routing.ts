@@ -23,7 +23,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'forgotten',
-    component: ForgottenComponent
+    component: ForgottenComponent,
+    data: { user: 'userid' }
   }
 ];
 

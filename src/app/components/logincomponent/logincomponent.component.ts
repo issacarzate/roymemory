@@ -104,11 +104,11 @@ public currentUser:any;
                    console.log("Si hay correo");
                    this.router.navigate(["listado"])
                 } else {
-                  this.openSnackBar("Usuario Incorrecto", "Cerrar");
+                  this.openSnackBar("El usuario y/o contraseña son inválidos", "Cerrar");
                 }
           },
           error => {
-            this.openSnackBar("Usuario Incorrecto", "Cerrar");
+            this.openSnackBar("El usuario y/o contraseña son inválidos", "Cerrar");
             console.error("error: ", error)
             console.log("A la verga");
           });

@@ -50,4 +50,23 @@ export class AuthenticationService {
     this.router.navigate([""]);
   }
 
+  olvidePassword(email){
+    console.log(`http://104.236.84.230:7080/v1/mail?email=${email}`)
+    return this.http.get(`http://104.236.84.230:7080/v1/mail?email=${email}`)//cambiar el url para que sirva para el proyecto
+
+      .map((response: Response) =>  {
+        console.log(response)
+      })
+  }
+
+  actualizarPassword(password, email){
+    let user = {password: password}
+    console.log("email: ", email)
+    console.log("password: ",user)
+    return this.http.put(`http://104.236.84.230:7080/v1/forgotPassword/${email}`, user)
+    .map((response: Response) =>  {
+      console.log(response)
+    })
+  }
+
 }
