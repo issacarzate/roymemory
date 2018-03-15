@@ -13,6 +13,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   providers: [AuthenticationService]
 })
 export class OlvidePasswordComponent implements OnInit {
+  email: string;
 
   constructor(private _httpAuthService:AuthenticationService,
     private router: Router,

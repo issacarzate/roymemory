@@ -12,6 +12,7 @@ import { AuthenticationService } from './../services/authentication.service';
   providers: [AuthenticationService]
 })
 export class ForgottenComponent implements OnInit {
+  password: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private _httpAuthService:AuthenticationService,

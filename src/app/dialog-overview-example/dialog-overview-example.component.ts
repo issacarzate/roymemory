@@ -11,6 +11,9 @@ import {UserService} from '../services/user.service'
   providers: [UserService]
 })
 export class DialogOverviewExampleComponent {
+  password: string;
+  mail: string;
+
   constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

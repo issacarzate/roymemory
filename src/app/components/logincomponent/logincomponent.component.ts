@@ -23,6 +23,8 @@ export class LogincomponentComponent implements OnInit {
   heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
   animal: string;
   name: string;
+  user: string;
+  password: string;
 
 static location: Location
 public currentUser:any;

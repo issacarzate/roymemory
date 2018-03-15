@@ -43,7 +43,7 @@ export class ListaFacturasComponent implements OnInit {
     let numerolet = new NumeroALetras()
     // console.log("numerolet: ", numerolet)
     let currency = {plural:'PESOS',singular:'PESO',centPlural:'CENTAVOS',centSingular:'CENTAVO'}
-    console.log(numerolet.NumeroALetras(numero,currency))
+    return numerolet.NumeroALetras(numero,currency)
     // numeroALetras.Unidades(numero);
     //console.log(numext);
     //return numext;
@@ -219,7 +219,9 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(20, 30, 'Cantidad con letra:');
            doc.setFontSize(10);
            //Checar cantidad con letra
-           doc.text(20, 35, 'Ochocientos cuarenta y dos pesos 00/100');
+           let numerin = this.conversor(data['$']['total'])
+
+           doc.text(20, 35, numerin);
            doc.setFontSize(12);
            doc.text(120, 30, 'Sub-Total:');
            doc.text(150, 30, data['$']['subTotal']);

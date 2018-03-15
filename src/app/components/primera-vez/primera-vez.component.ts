@@ -17,6 +17,11 @@ import * as jsPDF from 'jspdf'
 export class PrimeraVezComponent implements OnInit {
   heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
 
+  user: string;
+  password: string;
+  email: string;
+  mail: string;
+
 static location: Location
 public currentUser:any;
 public rfc: any;
