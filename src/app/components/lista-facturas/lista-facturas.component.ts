@@ -216,12 +216,12 @@ export class ListaFacturasComponent implements OnInit {
 
            doc.addPage();
            doc.setFontType("bold");
-           doc.text(20, 30, 'Cantidad con letra:');
+           doc.text(20, 15, 'Cantidad con letra:');
            doc.setFontSize(10);
            //Checar cantidad con letra
            let numerin = this.conversor(data['$']['total'])
 
-           doc.text(20, 35, numerin);
+           doc.text(20, 20, numerin);
            doc.setFontSize(12);
            doc.text(120, 30, 'Sub-Total:');
            doc.text(150, 30, data['$']['subTotal']);
@@ -279,7 +279,7 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(15, 280, 'WWW.ROYMEMORY.COM');
 
 
-           doc.save('Test.pdf');
+           doc.save('Factura.pdf');
              console.log(data['cfdi:Emisor'][0]['$']['nombre']);
          },
          error => console.error("error: ", error)
@@ -381,9 +381,9 @@ doc.text(170, 176, '362.93');
 
 doc.addPage();
 doc.setFontType("bold");
-doc.text(20, 30, 'Cantidad con letra:');
+doc.text(20, 20, 'Cantidad con letra:');
 doc.setFontSize(10);
-doc.text(20, 35, 'Ochocientos cuarenta y dos pesos 00/100');
+doc.text(20, 25, 'Ochocientos cuarenta y dos pesos 00/100');
 doc.setFontSize(12);
 doc.text(120, 30, 'Sub-Total:');
 doc.text(150, 30, '725.86');
