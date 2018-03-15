@@ -10,14 +10,16 @@ import * as xml2js from 'xml2js';
 
 import * as jsPDF from 'jspdf'
 
-declare var numeroALetras: any;
+import { NumeroALetras } from '../../services/numeros'
+
+// declare var numeroALetras: any;
 
 
 @Component({
   selector: 'app-lista-facturas',
   templateUrl: './lista-facturas.component.html',
   styleUrls: ['./lista-facturas.component.css'],
-  providers: [ListaService]
+  providers: [ListaService, NumeroALetras]
 })
 export class ListaFacturasComponent implements OnInit {
   files = new Array()
@@ -30,14 +32,19 @@ export class ListaFacturasComponent implements OnInit {
   public currentUser:any;
 
   constructor(private _httpListaService:ListaService,
-              private router: Router) {}
+              private router: Router, private numeroletra:NumeroALetras) {}
 
   ngOnInit() {
     this.getFiles()
   }
 
   conversor(numero){
-    numeroALetras.Unidades(numero);
+
+    let numerolet = new NumeroALetras()
+    // console.log("numerolet: ", numerolet)
+    let currency = {plural:'PESOS',singular:'PESO',centPlural:'CENTAVOS',centSingular:'CENTAVO'}
+    console.log(numerolet.NumeroALetras(numero,currency))
+    // numeroALetras.Unidades(numero);
     //console.log(numext);
     //return numext;
   }
