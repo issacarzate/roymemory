@@ -11,9 +11,6 @@ import {UserService} from '../services/user.service'
   providers: [UserService]
 })
 export class DialogOverviewExampleComponent {
-
-
-
   constructor(private router: Router,
     public dialogRef: MatDialogRef<DialogOverviewExampleComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -42,7 +39,4 @@ export class DialogOverviewExampleComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
-
 }
