@@ -35,10 +35,10 @@ export class OlvidePasswordComponent implements OnInit {
   this._httpAuthService.olvidePassword(email).subscribe(
       data => {
           console.log("Gracias por tu correo: ", email)
-              this.openSnackBar("Gracias por tu correo", "Cerrar");
+              this.openSnackBar("Revisa tu bandeja de entrada", "Cerrar");
             },
       error => {
-        this.openSnackBar("Intentalo mas tarde", "Cerrar");
+        this.openSnackBar("Error: Inténtalo mas tarde", "Cerrar");
         console.error("error: ", error)
       });
     }

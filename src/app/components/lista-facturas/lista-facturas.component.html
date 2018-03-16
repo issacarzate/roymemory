@@ -4,7 +4,6 @@
   <a class="blanco">{{usuario}}</a>
 </div>
   <a ><button mat-raised-button class="matboton" (click)="logout()">Salir</button></a>
-  <a ><button mat-raised-button class="matboton" (click)="conversor(12.01)">Numero Prueba</button></a>
 <div class="login-page">
   <div class="formm">
     <mat-list>
@@ -14,7 +13,7 @@
         <br>
         Total: {{ file.total }}
         <p></p>
-        <button  (click)="dowloadUnique(file.filename)">Descargar</button>
+        <button  mat-raised-button class="matboton"  (click)="dowloadUnique(file.filename)">Descargar</button>
         <mat-divider [inset]="true"></mat-divider>
       </mat-list-item>
     </mat-list>

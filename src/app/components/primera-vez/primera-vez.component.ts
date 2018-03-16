@@ -21,6 +21,7 @@ export class PrimeraVezComponent implements OnInit {
   password: string;
   email: string;
   mail: string;
+  passwordRef: string;
 
 static location: Location
 public currentUser:any;
@@ -46,7 +47,7 @@ public rfc: any;
         doc.save('Test.pdf');
     }
 
-  actualizarDatos(password, email) {
+  actualizarDatos(password, passwordRef, email) {
     this.rfc=JSON.parse(localStorage.getItem('currentUser'));
     let user = {
       id:       null,
@@ -54,7 +55,7 @@ public rfc: any;
       rfc:      this.rfc.rfc,
       email:    email
     }
-
+    if(password == passwordRef){
     this._httpAuthService.actualizarDatos(user)
       .subscribe(
           data => {
@@ -64,5 +65,8 @@ public rfc: any;
             console.error("error: ", error)
             console.log("A la verga");
           });
-        }
+        }else{
+        console.log("Escribe la misma contraseña en los dos campos")
+      }
+}
 }
