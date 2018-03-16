@@ -44,7 +44,6 @@ public currentUser:any;
       data: user
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.animal = result;
     });
   }
@@ -62,7 +61,6 @@ public currentUser:any;
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -78,13 +76,10 @@ public currentUser:any;
   },
     error => {
       console.error("error: ", error)
-      console.log("A la verga");
     });
   }
 
   login(rfc,password) {
-    console.log("rfc: ",rfc)
-    console.log("password: ",password)
     let user = {
       id:       null,
       password: password,
@@ -96,14 +91,9 @@ public currentUser:any;
               let serveruser = data
               this.currentUser = (JSON.parse(localStorage.getItem('currentUser'))) ? JSON.parse(localStorage.getItem('currentUser')) : null
               this.currentUser=JSON.parse(localStorage.getItem('currentUser'));
-              //this.router.navigate(["listado"])
-              console.log("ServerUser: ", serveruser)
-              console.log("hey: ", this.currentUser)
               if (this.currentUser && !this.currentUser.email) {
-                   console.log("No hay Correo");
                    this.openDialog(serveruser);
                 } else if (this.currentUser && this.currentUser.email) {
-                   console.log("Si hay correo");
                    this.router.navigate(["listado"])
                 } else {
                   this.openSnackBar("El usuario y/o contraseña son inválidos", "Cerrar");
@@ -112,7 +102,6 @@ public currentUser:any;
           error => {
             this.openSnackBar("El usuario y/o contraseña son inválidos", "Cerrar");
             console.error("error: ", error)
-            console.log("A la verga");
           });
         }
 }

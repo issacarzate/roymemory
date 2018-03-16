@@ -21,7 +21,6 @@ export class ForgottenComponent implements OnInit {
 
   ngOnInit() {
     let user = this.activatedRoute.snapshot.queryParams["user"];
-    console.log(user)
   }
 
   openSnackBar(message: string, action: string) {
@@ -35,12 +34,9 @@ export class ForgottenComponent implements OnInit {
     this._httpAuthService.actualizarPassword(password, mail)
       .subscribe(
         data => {
-          console.log("Contraseña enviada: ", mail, password)
           this.openSnackBar("Puedes ingresar con tu nueva contraseña", "Cerrar");
         }, error => {
           this.openSnackBar("Usuario Incorrecto", "Cerrar");
-          console.error("error: ", error)
-          console.log("A la verga");
         });
   }
 

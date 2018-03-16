@@ -40,18 +40,15 @@ export class DialogOverviewExampleComponent {
       this.data.email = mail;
       this.data.password = password;
       if(password == passwordRef && mail == mailRef){
-      console.log("data: ", this.data)
       this.userservice.updateUser(this.data)
         .subscribe(
           data => {
-            console.log("chaka: ", data),
           error =>  { console.error("error: ", error)}
           }
         )
       this.dialogRef.close();
       this.router.navigate(["listado"]);
     }else{
-      console.log("Valida tu contraseña");
       this.openSnackBar("Valida los datos", "Cerrar");
       }
     }

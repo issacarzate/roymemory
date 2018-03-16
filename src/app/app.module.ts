@@ -17,6 +17,7 @@ import { OlvidePasswordComponent } from './olvide-password/olvide-password.compo
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { QRCodeModule } from 'angular2-qrcode';
 
 import {
   MatAutocompleteModule,
@@ -113,6 +114,7 @@ export class DemoMaterialModule {}
     HttpClientModule,
     HttpModule,
     routing,
+    QRCodeModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule, MatButtonModule, MatCheckboxModule, DemoMaterialModule
   ],

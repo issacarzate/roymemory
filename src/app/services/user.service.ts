@@ -13,11 +13,8 @@ export class UserService {
   constructor(private http: Http){}
 
   updateUser(user)  {
-    console.log("v ", user)
-    console.log(`${this.url}/auth`)
     return this.http.put(`${this.url}/users/${user.email}`, user)
       .map((response: Response) =>  {
-        console.log("actualizado: ", response)
         return response.json()
       })
   }

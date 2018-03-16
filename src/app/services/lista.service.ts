@@ -13,13 +13,13 @@ export class ListaService {
   obtenerFactura(rfc)  {
     return this.http.get(`http://104.236.84.230:7080/v1/users/${rfc}`)
     .map(res =>  {
-      console.log(":v_ ", res)
+      console.log(res)
       return res.json()})
+
   }
   obtenerFacturaUnica(file) {
     return this.http.get(`http://104.236.84.230:7080/v1/file/${file}`)
     .map(res =>  {
-      console.log(":v_ ", res)
       return res.json()})
   }
 

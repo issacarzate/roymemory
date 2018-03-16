@@ -63,10 +63,8 @@ public rfc: any;
           },
           error => {
             console.error("error: ", error)
-            console.log("A la verga");
           });
         }else{
-        console.log("Escribe la misma contraseña en los dos campos")
       }
 }
 }
