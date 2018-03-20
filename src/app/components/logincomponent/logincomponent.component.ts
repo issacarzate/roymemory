@@ -48,6 +48,7 @@ public currentUser:any;
     });
   }
 
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
