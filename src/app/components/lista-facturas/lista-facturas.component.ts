@@ -81,7 +81,7 @@ export class ListaFacturasComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data)
-          if( data['cfdi:Receptor'][0]['$']['Rfc'] !== undefined){
+          if( data['cfdi:Receptor'][0]['$']['UsoCFDI'] !== undefined || data['cfdi:Receptor'][0]['$']['usocfdi'] !== undefined){
             let emisor = data['cfdi:Emisor'][0]['$']['rfc'];
             let receptor = data['cfdi:Receptor'][0]['$']['rfc'];
             let totalQR = data['$']['total'];
@@ -115,7 +115,12 @@ export class ListaFacturasComponent implements OnInit {
              })
 
              doc.setFontType("bolditalic");
+             if(data['cfdi:Emisor'][0]['$']['Nombre']){
              doc.text(105, 20, data['cfdi:Emisor'][0]['$']['Nombre'], null, null, 'center');
+           }
+           if(data['cfdi:Emisor'][0]['$']['nombre']){
+           doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
+         }
              doc.setFont("courier");
              doc.setFontType("normal");
              doc.text(20, 30, 'Oficina Matriz');
@@ -197,8 +202,18 @@ export class ListaFacturasComponent implements OnInit {
              doc.text(80, 165, 'Una sola exhibición');
              doc.setFontType("normal");
              doc.text(80, 115, 'F2542:');
+             if(data['cfdi:Receptor'][0]['$']['Rfc']){
              doc.text(80, 120,  data['cfdi:Receptor'][0]['$']['Rfc']);
+           }
+           if(data['cfdi:Receptor'][0]['$']['rfc']){
+           doc.text(80, 120,  data['cfdi:Receptor'][0]['$']['rfc']);
+         }
+           if(data['cfdi:Receptor'][0]['$']['Nombre']){
              doc.text(80, 125, data['cfdi:Receptor'][0]['$']['Nombre']);
+           }
+           if(data['cfdi:Receptor'][0]['$']['nombre']){
+             doc.text(80, 125, data['cfdi:Receptor'][0]['$']['nombre']);
+           }
              // doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
              //cuantos metodos de pago hay
              if(data['$']['FormaPago']=="01"){
@@ -294,7 +309,7 @@ export class ListaFacturasComponent implements OnInit {
              doc.save(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado'] +'.pdf');
           }
 
-          if(data['cfdi:Receptor'][0]['$']['rfc'] !== undefined)
+          if(data['cfdi:Receptor'][0]['$']['UsoCFDI'] == undefined && data['cfdi:Receptor'][0]['$']['usocfdi'] == undefined)
           {
           let emisor = data['cfdi:Emisor'][0]['$']['rfc'];
           let receptor = data['cfdi:Receptor'][0]['$']['rfc'];
