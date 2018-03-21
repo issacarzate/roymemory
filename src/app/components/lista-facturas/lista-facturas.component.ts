@@ -76,13 +76,40 @@ export class ListaFacturasComponent implements OnInit {
     this._httpListaService.obtenerFacturaUnica(file)
       .subscribe(
         data => {
+          var selloCFD = undefined
+          var emisor = undefined
+          var receptor = undefined
+          var totalQR = undefined
+
           console.log(data)
           if( data['cfdi:Receptor'][0]['$']['UsoCFDI'] !== undefined || data['cfdi:Receptor'][0]['$']['usocfdi'] !== undefined){
-            let emisor = data['cfdi:Emisor'][0]['$']['rfc'];
-            let receptor = data['cfdi:Receptor'][0]['$']['rfc'];
-            let totalQR = data['$']['total'];
+            if(data['cfdi:Emisor'][0]['$']['rfc']){
+              emisor = data['cfdi:Emisor'][0]['$']['rfc'];
+            }
+            if(data['cfdi:Emisor'][0]['$']['Rfc']){
+              emisor = data['cfdi:Emisor'][0]['$']['Rfc'];
+            }
+            if(data['cfdi:Receptor'][0]['$']['rfc']){
+              receptor = data['cfdi:Receptor'][0]['$']['rfc'];
+            }
+            if(data['cfdi:Receptor'][0]['$']['Rfc']){
+              receptor = data['cfdi:Receptor'][0]['$']['Rfc'];
+            }
+            if(data['$']['total']){
+              totalQR = data['$']['total'];
+            }
+            if(data['$']['Total']){
+              totalQR = data['$']['Total'];
+            }
+
             let uuidQR = data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID'];
-            let selloCFD = data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloCFD'] ;
+
+            if(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloCFD']){
+              selloCFD = data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloCFD'] ;
+            }
+            if(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD']){
+              selloCFD = data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD'] ;
+            }
             let selloCFDSliced = selloCFD.slice(-10);
             let strCFD = selloCFDSliced.substring(0, selloCFDSliced.length - 2)
 
