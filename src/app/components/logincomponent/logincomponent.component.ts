@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Location } from '@angular/common';
+//import { Location } from '@angular/common';
 import { User } from "./../../interfaces/user";
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+//import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DialogOverviewExampleComponent} from '../../dialog-overview-example/dialog-overview-example.component';
 import {OlvidePasswordComponent} from '../../olvide-password/olvide-password.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
 
-import * as jsPDF from 'jspdf';
+//import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-logincomponent',

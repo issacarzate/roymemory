@@ -12,7 +12,6 @@ import { ListaFacturasComponent } from './components/lista-facturas/lista-factur
 
 import { UserGuard } from './guards/user.guard';
 import { routing, appRoutingProviders }  from './app.routing';
-import { PrimeraVezComponent } from './components/primera-vez/primera-vez.component';
 import { OlvidePasswordComponent } from './olvide-password/olvide-password.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -99,7 +98,6 @@ export class DemoMaterialModule {}
     AppComponent,
     LogincomponentComponent,
     ListaFacturasComponent,
-    PrimeraVezComponent,
     DialogOverviewExampleComponent,
     OlvidePasswordComponent,
     ForgottenComponent

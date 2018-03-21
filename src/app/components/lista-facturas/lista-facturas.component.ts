@@ -5,15 +5,11 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import '../../services/numeros.js';
 import { ListaService } from '../../services/lista.service';
-import { QRCodeModule } from 'angular2-qrcode';
+import { NumeroALetras } from '../../services/numeros'
 
 import * as xml2js from 'xml2js';
-
 import * as jsPDF from 'jspdf'
-
 import * as QRious from 'qrious'
-
-import { NumeroALetras } from '../../services/numeros'
 
 // declare var numeroALetras: any;
 
