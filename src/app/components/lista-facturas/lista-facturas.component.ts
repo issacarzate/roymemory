@@ -13,6 +13,9 @@ import * as QRious from 'qrious'
 
 // declare var numeroALetras: any;
 
+import {saveAs as importedSaveAs} from "file-saver";
+
+
 
 @Component({
   selector: 'app-lista-facturas',
@@ -68,10 +71,27 @@ export class ListaFacturasComponent implements OnInit {
     this.router.navigate([""]);
         }
 
+  dowloadUniqueXML(file){
+    //this._httpListaService.obtenerXML(file).subscribe(data =>{
+      //  console.log(data)
+        //}, error => console.error("error: ", error));
+      //  this._httpListaService.downloadFile(file).subscribe(blob => {
+      ///      importedSaveAs(blob, file);
+
+  }
+
   dowloadUnique(file){
 
   let   metodoDePago1: string = "nulo";
   let contador1: number = 0;
+
+  this._httpListaService.dowloadUniqueXML(file)
+  .subscribe(blob => {
+    console.log("blob: ", blob);
+    importedSaveAs(blob,file)
+
+  })
+
 
     this._httpListaService.obtenerFacturaUnica(file)
       .subscribe(
