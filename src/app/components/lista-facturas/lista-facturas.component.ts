@@ -71,14 +71,14 @@ export class ListaFacturasComponent implements OnInit {
     this.router.navigate([""]);
         }
 
-  dowloadUniqueXML(file){
+  //dowloadUniqueXML(file){
     //this._httpListaService.obtenerXML(file).subscribe(data =>{
       //  console.log(data)
         //}, error => console.error("error: ", error));
       //  this._httpListaService.downloadFile(file).subscribe(blob => {
       ///      importedSaveAs(blob, file);
 
-  }
+  //}
 
   dowloadUnique(file){
 
