@@ -88,7 +88,7 @@ export class ListaFacturasComponent implements OnInit {
   this._httpListaService.dowloadUniqueXML(file)
   .subscribe(blob => {
     console.log("blob: ", blob);
-    importedSaveAs(blob,file)
+    importedSaveAs(blob,`${file}.xml`)
 
   })
 
