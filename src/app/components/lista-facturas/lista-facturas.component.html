@@ -1,9 +1,9 @@
-<div class="topnav">
-  <a class="active">Bienvenido: </a>
+<mat-toolbar color="primary">
+  <span>{{usuario}}</span>
+  <span class="example-fill-remaining-space"></span>
+  <span><button mat-raised-button class="matboton" (click)="logout()">Salir</button></span>
+</mat-toolbar>
 
-  <a class="blanco">{{usuario}}</a>
-</div>
-  <a ><button mat-raised-button class="matboton" (click)="logout()">Salir</button></a>
 <div class="login-page">
   <div class="formm">
     <mat-list>

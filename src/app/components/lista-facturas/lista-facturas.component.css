@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
 .login-page {
   width: 600px;
   padding: 8% 0 0;

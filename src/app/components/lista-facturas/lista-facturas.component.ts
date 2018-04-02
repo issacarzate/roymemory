@@ -148,114 +148,100 @@ export class ListaFacturasComponent implements OnInit {
              data['cfdi:Conceptos'][0]['cfdi:Concepto'].forEach((articulo, i) =>  {
                this.articulos.push(articulo)
                doc.setFontType("normal");
-               doc.text(10, (175+contador1), Math.round(parseFloat(JSON.parse(JSON.stringify(articulo['$']['Cantidad'])))).toString());
                doc.setFontSize(8);
-               doc.text(33, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['Descripcion'])));
-               doc.setFontSize(12);
-               doc.text(130, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['ValorUnitario'])));
-               doc.text(170, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['Importe'] )));
-               contador1 = contador1 + 5;
+               doc.text(10, (73+contador1), Math.round(parseFloat(JSON.parse(JSON.stringify(articulo['$']['Cantidad'])))).toString());
+               doc.text(33, (73+contador1), JSON.parse(JSON.stringify(articulo['$']['Descripcion'])));
+               doc.text(130, (73+contador1), JSON.parse(JSON.stringify(articulo['$']['ValorUnitario'])));
+               doc.text(170, (73+contador1), JSON.parse(JSON.stringify(articulo['$']['Importe'] )));
+               contador1 = contador1 + 3;
              })
 
              doc.setFontType("bolditalic");
              if(data['cfdi:Emisor'][0]['$']['Nombre']){
-             doc.text(105, 20, data['cfdi:Emisor'][0]['$']['Nombre'], null, null, 'center');
+             doc.text(105, 10, data['cfdi:Emisor'][0]['$']['Nombre'], null, null, 'center');
            }
            if(data['cfdi:Emisor'][0]['$']['nombre']){
-           doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
+           doc.text(105, 10, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
          }
              doc.setFont("courier");
              doc.setFontType("normal");
-             doc.text(20, 30, 'Oficina Matriz');
-             doc.text(20, 35, 'Sevilla No. 16-A');
-             doc.text(20, 40, 'Colonia Juarez');
-             doc.text(20, 45, 'Delegación, Cuahutémoc');
-             doc.text(20, 50, 'CDMX');
-             doc.text(20, 55, 'C.P. 06600');
-             doc.text(20, 60, 'Tel. (55)5999-4196');
-             doc.text(20, 65, 'RFC: CME090507SE2');
+             doc.setFontSize(8)
+             doc.text(20, 25, 'Oficina Matriz');
+             doc.text(20, 28, 'Sevilla No. 16-A');
+             doc.text(20, 31, 'Colonia Juarez');
+             doc.text(20, 34, 'Delegación, Cuahutémoc');
+             doc.text(20, 37, 'CDMX');
+             doc.text(20, 40, 'C.P. 06600');
+             doc.text(20, 43, 'Tel. (55)5999-4196');
+             doc.text(20, 46, 'RFC: CME090507SE2');
 
              if(data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'] !== undefined){
-             doc.text(120, 30, 'LUGAR DE EXPEDICION:');
-             doc.text(120, 35, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['calle'] + "   "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['noExterior']);
-             doc.text(120, 40, data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['calle'] + " #"+ data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['noExterior']);
-             doc.text(120, 45, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['colonia'] + "  "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['localidad']);
-             doc.text(120, 55, "C.P: " +  data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['codigoPostal'] + "  Tel 59994196");
+             doc.text(60, 25, 'LUGAR DE EXPEDICION:');
+             doc.text(65, 28, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['calle'] + "   "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['noExterior']);
+             doc.text(65, 31, data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['calle'] + " #"+ data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['noExterior']);
+             doc.text(65, 34, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['colonia'] + "  "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['localidad']);
+             doc.text(65, 37, "C.P: " +  data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['codigoPostal'] + "  Tel 59994196");
            }
 
 
              doc.setFont("times");
              doc.setFontType("normal");
-             doc.text(20, 75, 'FECHA DE EXPEDICIÓN');
-             doc.text(120, 75, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
-             doc.text(20, 80, 'COMPROBANTE FISCAL DIGITAL');
-
-             doc.setFontType("normal");
-             doc.setFontSize(20);
-             doc.text(20, 88, 'Factura');
-             doc.setFontType("bold");
-             doc.setFontSize(25);
-             doc.text(20, 98,  data['$']['Serie'] + " " + data['$']['Folio'] );
-
-             doc.setFontType("normal");
-             doc.setFontSize(20);
-             doc.text(60, 88, 'Uso CFDI');
-             doc.setFontType("bold");
-             doc.setFontSize(15);
-
+             doc.text(110, 25, 'FECHA DE EXPEDICIÓN');
+             doc.text(157, 25, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+             doc.text(110, 28, 'COMPROBANTE FISCAL DIGITAL');
+             doc.text(110, 34, 'Uso CFDI');
+             doc.text(110, 31, 'Factura');
+             doc.text(157, 31,  data['$']['Serie'] + " " + data['$']['Folio'] );
              if(data['cfdi:Receptor'][0]['$']['UsoCFDI']){
                switch(data['cfdi:Receptor'][0]['$']['UsoCFDI']) {
                      case 'G01': {
-                        doc.text(60, 95, 'Adquisición de mercancias');
+                        doc.text(157, 34, 'Adquisición de mercancias');
                         break;
                      }
                      case 'G02': {
-                        doc.text(60, 95, 'Devoluciones descuentos o bonificaciones');
+                        doc.text(157, 34, 'Devoluciones descuentos o bonificaciones');
                         break;
                      }
                      case 'G03': {
-                        doc.text(60, 95, 'Gastos en general');
+                        doc.text(157, 34, 'Gastos en general');
                         break;
                      }
                      case 'P01': {
-                        doc.text(60, 95, 'Por definir');
+                        doc.text(157, 34, 'Por definir');
                         break;
                      }
                      default: {
-                        doc.text(60, 95, 'No especificado');
+                        doc.text(157, 34, 'No especificado');
                         break;
                      }
                   }
              }else{
-                doc.text(60, 95, 'No especificado');
+                doc.text(157, 34, 'No especificado');
              }
 
+
              doc.setFontType("bolditalic");
-             doc.setFontSize(20);
-             doc.text(105, 108, 'Datos Fiscales del Cliente', null, null, 'center');
+             doc.text(105, 48, 'Datos Fiscales del Cliente', null, null, 'center');
 
              doc.setFont("courier");
-             doc.setFontSize(12);
              doc.setFontType("normal");
-             doc.text(20, 115, '#Cliente:');
-             doc.text(20, 120, 'R.F.C:');
-             doc.text(20, 125, 'Nombre:');
-             doc.text(20, 160, 'Método de pago:');
-             doc.text(20, 165, 'Forma de pago:');
-             doc.text(80, 165, 'Una sola exhibición');
+             doc.text(20, 54, 'R.F.C:');
+             doc.text(20, 57, 'Nombre:');
+             doc.text(20, 60, 'Método de pago:');
+             doc.text(20, 63, 'Forma de pago:');
+             doc.text(80, 63, 'Una sola exhibición');
              doc.setFontType("normal");
-             doc.text(80, 115, 'F2542:');
              if(data['cfdi:Receptor'][0]['$']['Rfc']){
-             doc.text(80, 120,  data['cfdi:Receptor'][0]['$']['Rfc']);
+             doc.text(80, 54,  data['cfdi:Receptor'][0]['$']['Rfc']);
            }
            if(data['cfdi:Receptor'][0]['$']['rfc']){
-           doc.text(80, 120,  data['cfdi:Receptor'][0]['$']['rfc']);
+           doc.text(80, 54,  data['cfdi:Receptor'][0]['$']['rfc']);
          }
            if(data['cfdi:Receptor'][0]['$']['Nombre']){
-             doc.text(80, 125, data['cfdi:Receptor'][0]['$']['Nombre']);
+             doc.text(80, 57, data['cfdi:Receptor'][0]['$']['Nombre']);
            }
            if(data['cfdi:Receptor'][0]['$']['nombre']){
-             doc.text(80, 125, data['cfdi:Receptor'][0]['$']['nombre']);
+             doc.text(80, 57, data['cfdi:Receptor'][0]['$']['nombre']);
            }
              // doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
              //cuantos metodos de pago hay
@@ -277,13 +263,13 @@ export class ListaFacturasComponent implements OnInit {
             if(data['$']['FormaPago']=="99"){
             metodoDePago1 = "Por Definir"
             }
-             doc.text(80, 160, data['$']['FormaPago'] + " " + metodoDePago1);
+             doc.text(80, 60, data['$']['FormaPago'] + " " + metodoDePago1);
 
              doc.setFontType("bold");
-             doc.text(10, 170, 'Cantidad');
-             doc.text(70, 170, 'Descripción');
-             doc.text(130, 170, 'P. Unitario');
-             doc.text(170, 170, 'Importe');
+             doc.text(10, 70, 'Cantidad');
+             doc.text(70, 70, 'Descripción');
+             doc.text(130, 70, 'P. Unitario');
+             doc.text(170, 70, 'Importe');
 
              doc.addPage();
              doc.setFontType("bold");
@@ -377,111 +363,99 @@ export class ListaFacturasComponent implements OnInit {
            data['cfdi:Conceptos'][0]['cfdi:Concepto'].forEach((articulo, i) =>  {
              this.articulos.push(articulo)
              doc.setFontType("normal");
-             doc.text(10, (175+contador1), Math.round(parseFloat(JSON.parse(JSON.stringify(articulo['$']['cantidad'])))).toString());
-             doc.setFontSize(8);
-             doc.text(33, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['descripcion'])));
-             doc.setFontSize(12);
-             doc.text(130, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['valorUnitario'])));
-             doc.text(170, (175+contador1), JSON.parse(JSON.stringify(articulo['$']['importe'])));
-             contador1 = contador1 + 5;
+             doc.setFontSize(8)
+             doc.text(10, (88+contador1), Math.round(parseFloat(JSON.parse(JSON.stringify(articulo['$']['cantidad'])))).toString());
+             doc.text(33, (88+contador1), JSON.parse(JSON.stringify(articulo['$']['descripcion'])));
+             doc.text(130, (88+contador1), JSON.parse(JSON.stringify(articulo['$']['valorUnitario'])));
+             doc.text(170, (88+contador1), JSON.parse(JSON.stringify(articulo['$']['importe'])));
+             contador1 = contador1 + 3;
            })
 
            doc.setFontType("bolditalic");
-           doc.text(105, 20, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
+           doc.text(105, 10, data['cfdi:Emisor'][0]['$']['nombre'], null, null, 'center');
            doc.setFont("courier");
            doc.setFontType("normal");
-           doc.text(20, 30, 'Oficina Matriz');
-           doc.text(20, 35, 'Sevilla No. 16-A');
-           doc.text(20, 40, 'Colonia Juarez');
-           doc.text(20, 45, 'Delegación, Cuahutémoc');
-           doc.text(20, 50, 'CDMX');
-           doc.text(20, 55, 'C.P. 06600');
-           doc.text(20, 60, 'Tel. (55)5999-4196');
-           doc.text(20, 65, 'RFC: CME090507SE2');
+           doc.setFontSize(8)
+           doc.text(20, 25, 'Oficina Matriz');
+           doc.text(20, 28, 'Sevilla No. 16-A');
+           doc.text(20, 31, 'Colonia Juarez');
+           doc.text(20, 34, 'Delegación, Cuahutémoc');
+           doc.text(20, 37, 'CDMX');
+           doc.text(20, 40, 'C.P. 06600');
+           doc.text(20, 43, 'Tel. (55)5999-4196');
+           doc.text(20, 46, 'RFC: CME090507SE2');
 
-           doc.text(120, 30, 'LUGAR DE EXPEDICION:');
-           doc.text(120, 35, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['calle'] + "   "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['noExterior']);
-           doc.text(120, 40, data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['calle'] + " #"+ data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['noExterior']);
-           doc.text(120, 45, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['colonia'] + "  "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['localidad']);
-           doc.text(120, 55, "C.P: " +  data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['codigoPostal'] + "  Tel 59994196");
+           doc.text(65, 25, 'LUGAR DE EXPEDICION:');
+           doc.text(65, 28, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['calle'] + "   "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['noExterior']);
+           doc.text(65, 31, data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['calle'] + " #"+ data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['noExterior']);
+           doc.text(65, 34, data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['colonia'] + "  "+ data['cfdi:Emisor'][0]['cfdi:DomicilioFiscal'][0]['$']['localidad']);
+           doc.text(65, 37, "C.P: " +  data['cfdi:Emisor'][0]['cfdi:ExpedidoEn'][0]['$']['codigoPostal'] + "  Tel 59994196");
 
 
            doc.setFont("times");
            doc.setFontType("normal");
-           doc.text(20, 75, 'FECHA DE EXPEDICIÓN');
-           doc.text(120, 75, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
-           doc.text(20, 80, 'COMPROBANTE FISCAL DIGITAL');
-
-           doc.setFontType("normal");
-           doc.setFontSize(20);
-           doc.text(20, 88, 'Factura');
-           doc.setFontType("bold");
-           doc.setFontSize(25);
-           doc.text(20, 98, data['$']['serie'] + " " + data['$']['folio'] );
-
-           doc.setFontType("normal");
-           doc.setFontSize(20);
-           doc.text(60, 88, 'Uso CFDI');
-           doc.setFontType("bold");
-           doc.setFontSize(15);
+           doc.text(110, 25, 'FECHA DE EXPEDICIÓN');
+           doc.text(162, 25, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+           doc.text(110, 28, 'COMPROBANTE FISCAL DIGITAL');
+           doc.text(110, 31, 'Factura');
+           doc.text(162, 31, data['$']['serie'] + " " + data['$']['folio'] );
+           doc.text(110, 34, 'Uso CFDI');
            if(data['cfdi:Emisor'][0]['$']['UsoCFDI'] != null){
              switch(data['cfdi:Emisor'][0]['$']['UsoCFDI']) {
                    case 'g01': {
-                      doc.text(60, 95, 'Adquisición de mercancias');
+                      doc.text(162, 34, 'Adquisición de mercancias');
                       break;
                    }
                    case 'g02': {
-                      doc.text(60, 95, 'Devoluciones descuentos o bonificaciones');
+                      doc.text(162, 34, 'Devoluciones descuentos o bonificaciones');
                       break;
                    }
                    case 'g03': {
-                      doc.text(60, 95, 'Gastos en general');
+                      doc.text(162, 34, 'Gastos en general');
                       break;
                    }
                    case 'p01': {
-                      doc.text(60, 95, 'Por definir');
+                      doc.text(162, 34, 'Por definir');
                       break;
                    }
                    default: {
-                      doc.text(60, 95, 'No especificado');
+                      doc.text(162, 34, 'No especificado');
                       break;
                    }
                 }
            }else{
-              doc.text(60, 95, 'No especificado');
+              doc.text(162, 34, 'No especificado');
            }
 
            doc.setFontType("bolditalic");
-           doc.setFontSize(20);
-           doc.text(105, 108, 'Datos Fiscales del Cliente', null, null, 'center');
+           doc.setFontSize(8);
+           doc.text(105, 48, 'Datos Fiscales del Cliente', null, null, 'center');
 
            doc.setFont("courier");
-           doc.setFontSize(12);
            doc.setFontType("normal");
-           doc.text(20, 115, '#Cliente:');
-           doc.text(20, 120, 'R.F.C:');
-           doc.text(20, 125, 'Nombre:');
-           doc.text(20, 130, 'Domicilio:');
-           doc.text(20, 135, 'Colonia:');
-           doc.text(20, 140, 'Número:');
-           doc.text(20, 145, 'C.P.:');
-           doc.text(20, 150, 'País:');
-           doc.text(20, 155, 'Ciudad:');
-           doc.text(20, 160, 'Método de pago:');
-           doc.text(20, 165, 'Forma de pago:');
-           doc.text(80, 165, 'Una sola exhibición');
+           doc.text(20, 54, 'R.F.C:');
+           doc.text(20, 57, 'Nombre:');
+           doc.text(20, 60, 'Domicilio:');
+           doc.text(20, 63, 'Colonia:');
+           doc.text(20, 66, 'Número:');
+           doc.text(20, 69, 'C.P.:');
+           doc.text(20, 72, 'País:');
+           doc.text(20, 75, 'Ciudad:');
+           doc.text(20, 78, 'Método de pago:');
+           doc.text(20, 81, 'Forma de pago:');
+           doc.text(80, 81, 'Una sola exhibición');
 
            doc.setFontType("normal");
 
-           doc.text(80, 115, 'F2542:');
-           doc.text(80, 120, data['cfdi:Receptor'][0]['$']['rfc']);
-           doc.text(80, 125, data['cfdi:Receptor'][0]['$']['nombre']);
-           doc.text(80, 130, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['calle']);
-           doc.text(80, 135, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['colonia']);
+           doc.text(80, 54, data['cfdi:Receptor'][0]['$']['rfc']);
+           doc.text(80, 57, data['cfdi:Receptor'][0]['$']['nombre']);
+           doc.text(80, 60, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['calle']);
+           doc.text(80, 63, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['colonia']);
            //porqueno hay
-           doc.text(80, 140, '26 PTE');
-           doc.text(80, 145, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['codigoPostal']);
-           doc.text(80, 150, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['pais']);
+           doc.text(80, 66, '26 PTE');
+           doc.text(80, 69, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['codigoPostal']);
+           doc.text(80, 75, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
+           doc.text(80, 72, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['pais']);
            // doc.text(80, 155, data['cfdi:Receptor'][0]['cfdi:Domicilio'][0]['$']['municipio']);
            //cuantos metodos de pago hay
            if(data['$']['metodoDePago']=="01"){
@@ -502,13 +476,13 @@ export class ListaFacturasComponent implements OnInit {
           if(data['$']['metodoDePago']=="99"){
           metodoDePago1 = "por definir"
           }
-           doc.text(80, 160, data['$']['metodoDePago'] + " " + metodoDePago1);
+           doc.text(80, 78, data['$']['metodoDePago'] + " " + metodoDePago1);
 
            doc.setFontType("bold");
-           doc.text(10, 170, 'Cantidad');
-           doc.text(70, 170, 'Descripción');
-           doc.text(130, 170, 'P. Unitario');
-           doc.text(170, 170, 'Importe');
+           doc.text(10, 85, 'Cantidad');
+           doc.text(70, 85, 'Descripción');
+           doc.text(130, 85, 'P. Unitario');
+           doc.text(170, 85, 'Importe');
 
            doc.addPage();
            doc.setFontType("bold");
