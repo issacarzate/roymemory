@@ -189,6 +189,7 @@ export class ListaFacturasComponent implements OnInit {
              doc.text(110, 25, 'FECHA DE EXPEDICIÓN');
              doc.text(157, 25, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
              doc.text(110, 28, 'COMPROBANTE FISCAL DIGITAL');
+             doc.text(157, 28, 'FACTURA');
              doc.text(110, 34, 'Uso CFDI');
              doc.text(110, 31, 'Factura');
              doc.text(157, 31,  data['$']['Serie'] + " " + data['$']['Folio'] );
@@ -218,6 +219,9 @@ export class ListaFacturasComponent implements OnInit {
              }else{
                 doc.text(157, 34, 'No especificado');
              }
+
+             doc.text(110, 37, 'Regimen Fiscal');
+             doc.text(157, 37, '601 Regimen general de ley personas morales');
 
 
              doc.setFontType("bolditalic");
@@ -395,10 +399,11 @@ export class ListaFacturasComponent implements OnInit {
            doc.setFont("times");
            doc.setFontType("normal");
            doc.text(110, 25, 'FECHA DE EXPEDICIÓN');
-           doc.text(162, 25, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+           doc.text(157, 25, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
            doc.text(110, 28, 'COMPROBANTE FISCAL DIGITAL');
-           doc.text(110, 31, 'Factura');
-           doc.text(162, 31, data['$']['serie'] + " " + data['$']['folio'] );
+           doc.text(157, 28, 'Factura');
+           doc.text(110, 31, 'Folio');
+           doc.text(157, 31, data['$']['serie'] + " " + data['$']['folio'] );
            doc.text(110, 34, 'Uso CFDI');
            if(data['cfdi:Emisor'][0]['$']['UsoCFDI'] != null){
              switch(data['cfdi:Emisor'][0]['$']['UsoCFDI']) {
@@ -407,25 +412,27 @@ export class ListaFacturasComponent implements OnInit {
                       break;
                    }
                    case 'g02': {
-                      doc.text(162, 34, 'Devoluciones descuentos o bonificaciones');
+                      doc.text(157, 34, 'Devoluciones descuentos o bonificaciones');
                       break;
                    }
                    case 'g03': {
-                      doc.text(162, 34, 'Gastos en general');
+                      doc.text(157, 34, 'Gastos en general');
                       break;
                    }
                    case 'p01': {
-                      doc.text(162, 34, 'Por definir');
+                      doc.text(157, 34, 'Por definir');
                       break;
                    }
                    default: {
-                      doc.text(162, 34, 'No especificado');
+                      doc.text(157, 34, 'No especificado');
                       break;
                    }
                 }
            }else{
-              doc.text(162, 34, 'No especificado');
+              doc.text(157, 34, 'No especificado');
            }
+           doc.text(110, 37, 'Regimen Fiscal');
+           doc.text(157, 37, '601 Regimen general de ley personas morales');
 
            doc.setFontType("bolditalic");
            doc.setFontSize(8);
