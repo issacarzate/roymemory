@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-//import { Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { User } from "./../../interfaces/user";
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
