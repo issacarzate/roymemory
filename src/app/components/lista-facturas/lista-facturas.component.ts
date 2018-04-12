@@ -275,68 +275,63 @@ export class ListaFacturasComponent implements OnInit {
              doc.text(130, 70, 'P. Unitario');
              doc.text(170, 70, 'Importe');
 
-             doc.addPage();
+             doc.setFontSize(6);
              doc.setFontType("bold");
-             doc.text(20, 15, 'Cantidad con letra:');
-             doc.setFontSize(10);
+             doc.text(110, 236, 'Cantidad con letra:');
              //Checar cantidad con letra
-             let numerin = this.conversor(data['$']['Total'])
+             let numerin = doc.splitTextToSize(this.conversor(data['$']['Total']),45)
+             doc.text(110, 238, numerin);
 
-             doc.text(20, 20, numerin);
-             doc.setFontSize(12);
-             doc.text(120, 30, 'Sub-Total:');
-             doc.text(150, 30, data['$']['SubTotal']);
-             doc.text(120, 35, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['Impuesto'] + " " + data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['TipoFactor'] + "%");
-             doc.text(150, 35,  data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['Importe'] );
-             doc.text(120, 40, 'Total:');
-             doc.text(150, 40, data['$']['Total']);
-             doc.text(120, 45, 'Piezas:');
+             doc.text(158, 236, 'Sub-Total:');
+             doc.text(171, 236, data['$']['SubTotal']);
+             doc.text(158, 238, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['Impuesto'] + " " + data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['TipoFactor'] + "%");
+             doc.text(171, 238,  data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['Importe'] );
+             doc.text(158, 240, 'Total:');
+             doc.text(171, 240, data['$']['Total']);
+             doc.text(158, 242, 'Piezas:');
              //Donde esta la cantidad
-             doc.text(150, 45,data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']['Cantidad']);
+             doc.text(171, 242,data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']['Cantidad']);
 
-             doc.text(15, 35,'SELLO DIGITAL DEL EMISOR');
+             doc.text(15, 236,'SELLO DIGITAL DEL EMISOR');
              doc.setFontType("normal");
              var textLines = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloCFD'], 90);
-             doc.text(textLines, 15, 40);
+             doc.text(textLines, 15, 238);
 
              //Como se genera
              doc.setFontType("bold");
-             doc.text(110, 55,'SELLO DIGITAL DEL SAT');
+             doc.text(110, 252,'SELLO DIGITAL DEL SAT');
              doc.setFontType("normal");
              var textLines2 = doc.splitTextToSize("||"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['Version']+"|"+ data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']  +"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']+"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloCFD']+"||", 90);
-             doc.text(textLines2, 110, 60);
+             doc.text(textLines2, 110, 254);
 
 
              doc.setFontType("bold");
-             doc.text(15, 115,'SELLO DIGITAL DEL SAT');
+             doc.text(15, 252,'SELLO DIGITAL DEL SAT');
              doc.setFontType("normal");
              var textLines3 = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['SelloSAT'], 90);
-             doc.text(textLines3, 15, 120);
+             doc.text(textLines3, 15, 254);
 
 
 
 
-             doc.setFontSize(10);
              doc.setFontType("bold");
-             doc.text(15, 200, 'Folio Fiscal:');
-             doc.text(15, 205, 'Fecha y Hora de Certificación:');
-             doc.text(15, 210, 'No de Serie del Certificado del SAT:');
-             doc.text(15, 215, 'No de Serie del Certificado del Contribuyente:');
-             doc.text(15, 220, 'Timbre Fiscal Digital');
-             doc.addImage(imgData, 'JPEG', 15, 225, 50, 50)
-             doc.text(70, 250, 'Nombre, Firma, Fecha___________________________________');
+             doc.text(45, 276, 'Folio Fiscal:');
+             doc.text(45, 278, 'Fecha y Hora de Certificación:');
+             doc.text(45, 280, 'No de Serie del Certificado del SAT:');
+             doc.text(45, 282, 'No de Serie del Certificado del Contribuyente:');
+             doc.addImage(imgData, 'JPEG', 15, 270, 25, 25)
 
              doc.setFontType("normal");
-             doc.text(120, 200, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']);
-             doc.text(120, 205, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
-             doc.text(120, 210, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['NoCertificadoSAT']);
-             doc.text(120, 215, data['$']['NoCertificado']);
+             doc.text(105, 276, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']);
+             doc.text(105, 278, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+             doc.text(105, 280, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['NoCertificadoSAT']);
+             doc.text(105, 282, data['$']['NoCertificado']);
 
 
              doc.setFontType("bold");
-             doc.text(15, 280, 'ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI');
-             doc.text(15, 285, 'DESCARGA TU FACTURA ELECTRÓNICA EN:');
-             doc.text(15, 290, 'WWW.ROYMEMORY.COM');
+             doc.text(45, 286, 'ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI');
+             doc.text(45, 288, 'DESCARGA TU FACTURA ELECTRÓNICA EN:');
+             doc.text(45, 290, 'WWW.ROYMEMORY.COM');
 
 
              doc.save(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado'] +'.pdf');
@@ -491,68 +486,65 @@ export class ListaFacturasComponent implements OnInit {
            doc.text(130, 85, 'P. Unitario');
            doc.text(170, 85, 'Importe');
 
-           doc.addPage();
+           //doc.addPage();
+           doc.setFontSize(6);
            doc.setFontType("bold");
-           doc.text(20, 15, 'Cantidad con letra:');
-           doc.setFontSize(10);
+           doc.text(110, 236, 'Cantidad con letra:');
            //Checar cantidad con letra
-           let numerin = this.conversor(data['$']['total'])
+           let numerin = doc.splitTextToSize(this.conversor(data['$']['total']), 45)
+           doc.text(110, 238, numerin);
 
-           doc.text(20, 20, numerin);
-           doc.setFontSize(12);
-           doc.text(120, 30, 'Sub-Total:');
-           doc.text(150, 30, data['$']['subTotal']);
-           doc.text(120, 35, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['impuesto'] + " " + data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['tasa'] + "%");
-           doc.text(150, 35, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['importe']);
-           doc.text(120, 40, 'Total:');
-           doc.text(150, 40, data['$']['total']);
-           doc.text(120, 45, 'Piezas:');
+
+           doc.text(158, 236, 'Sub-Total:');
+           doc.text(171, 236, data['$']['subTotal']);
+           doc.text(158, 238, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['impuesto'] + " " + data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['tasa'] + "%");
+           doc.text(171, 238, data['cfdi:Impuestos'][0]['cfdi:Traslados'][0]['cfdi:Traslado'][0]['$']['importe']);
+           doc.text(158, 240, 'Total:');
+           doc.text(171, 240, data['$']['total']);
+           doc.text(158, 242, 'Piezas:');
            //Donde esta la cantidad
-           doc.text(150, 45, data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']['cantidad']);
+           doc.text(171, 242, data['cfdi:Conceptos'][0]['cfdi:Concepto'][0]['$']['cantidad']);
 
-           doc.text(15, 35,'SELLO DIGITAL DEL EMISOR');
+           doc.text(15, 236,'SELLO DIGITAL DEL EMISOR');
            doc.setFontType("normal");
            var textLines = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD'], 90);
-           doc.text(textLines, 15, 40);
+           doc.text(textLines, 15, 238);
 
            //Como se genera
            doc.setFontType("bold");
-           doc.text(110, 55,'SELLO DIGITAL DEL SAT');
+           doc.text(110, 252,'SELLO DIGITAL DEL SAT');
            doc.setFontType("normal");
            var textLines2 = doc.splitTextToSize("||"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['version']+"|"+ data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']  +"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']+"|"+data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloCFD']+"||", 90);
-           doc.text(textLines2, 110, 60);
+           doc.text(textLines2, 110, 254);
 
 
            doc.setFontType("bold");
-           doc.text(15, 115,'SELLO DIGITAL DEL SAT');
+           doc.text(15, 252,'SELLO DIGITAL DEL SAT');
            doc.setFontType("normal");
            var textLines3 = doc.splitTextToSize(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['selloSAT'], 90);
-           doc.text(textLines3, 15, 120);
+           doc.text(textLines3, 15, 254);
 
 
 
 
-           doc.setFontSize(10);
            doc.setFontType("bold");
-           doc.text(15, 200, 'Folio Fiscal:');
-           doc.text(15, 205, 'Fecha y Hora de Certificación:');
-           doc.text(15, 210, 'No de Serie del Certificado del SAT:');
-           doc.text(15, 215, 'No de Serie del Certificado del Contribuyente:');
-           doc.text(15, 220, 'Timbre Fiscal Digital');
-           doc.addImage(imgData, 'JPEG', 15, 225, 50, 50)
-           doc.text(70, 250, 'Nombre, Firma, Fecha___________________________________');
+           doc.text(45, 276, 'Folio Fiscal:');
+           doc.text(45, 278, 'Fecha y Hora de Certificación:');
+           doc.text(45, 280, 'No de Serie del Certificado del SAT:');
+           doc.text(45, 282, 'No de Serie del Certificado del Contribuyente:');
+           doc.addImage(imgData, 'JPEG', 15, 270, 25, 25)
 
            doc.setFontType("normal");
-           doc.text(120, 200, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']);
-           doc.text(120, 205, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
-           doc.text(120, 210, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['noCertificadoSAT']);
-           doc.text(120, 215, data['$']['noCertificado']);
+           doc.text(105, 276, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['UUID']);
+           doc.text(105, 278, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado']);
+           doc.text(105, 280, data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['noCertificadoSAT']);
+           doc.text(105, 282, data['$']['noCertificado']);
 
 
            doc.setFontType("bold");
-           doc.text(15, 280, 'ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI');
-           doc.text(15, 285, 'DESCARGA TU FACTURA ELECTRÓNICA EN:');
-           doc.text(15, 290, 'WWW.ROYMEMORY.COM');
+           doc.text(45, 286, 'ESTE DOCUMENTO ES UNA REPRESENTACION IMPRESA DE UN CFDI');
+           doc.text(45, 288, 'DESCARGA TU FACTURA ELECTRÓNICA EN:');
+           doc.text(45, 290, 'WWW.ROYMEMORY.COM');
 
 
            doc.save(data['cfdi:Complemento'][0]['tfd:TimbreFiscalDigital'][0]['$']['FechaTimbrado'] +'.pdf');}
