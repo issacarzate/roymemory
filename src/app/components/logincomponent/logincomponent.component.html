@@ -1,6 +1,7 @@
 <div class="login-page">
   <img src="https://roymemory.com.mx/images/logo.png" alt="Mountain View">
   <div class="form">
+    <p>Si es tu primera vez ingresa con tu RFC en usuario y contraseña</p>
       <input class="form-control" type="text" placeholder="RFC" [(ngModel)]="user" required/>
       <input class="form-control" type="password" placeholder="Contraseña" [(ngModel)]="password" required/>
       <button (click)="login(user,password)">login</button>
