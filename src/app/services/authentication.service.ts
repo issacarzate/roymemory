@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
-
+  url= 'http://localhost:7080/v1';
+  //url= 'http://104.236.84.230:7080/v1'
   constructor(private http: Http, private router: Router) { }
 
   login(user)  {
-    return this.http.post('http://104.236.84.230:7080/v1/auth', user)
+    return this.http.post(`${this.url}/auth`, user)
       .map((response: Response) =>  {
         //inicia sesión
         let userdata = response.json()
@@ -32,7 +33,7 @@ export class AuthenticationService {
 
   }
   actualizarDatos(user){
-    return this.http.put('http://104.236.84.230:7080/v1/auth', user)//cambiar el url para que sirva para el proyecto
+    return this.http.put(`${this.url}/auth`, user)//cambiar el url para que sirva para el proyecto
 
       .map((response: Response) =>  {
         //inicia sesión
@@ -46,7 +47,7 @@ export class AuthenticationService {
   }
 
   olvidePassword(email){
-    return this.http.get(`http://104.236.84.230:7080/v1/mail?email=${email}`)//cambiar el url para que sirva para el proyecto
+    return this.http.get(`${this.url}/mail?email=${email}`)//cambiar el url para que sirva para el proyecto
 
       .map((response: Response) =>  {
       })
@@ -54,7 +55,7 @@ export class AuthenticationService {
 
   actualizarPassword(password, email){
     let user = {password: password}
-    return this.http.put(`http://104.236.84.230:7080/v1/forgotPassword/${email}`, user)
+    return this.http.put(`${this.url}/forgotPassword/${email}`, user)
     .map((response: Response) =>  {
     })
   }

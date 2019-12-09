@@ -7,8 +7,8 @@ import { User} from '../interfaces/user';
 
 @Injectable()
 export class UserService {
-  // url= 'http://localhost:7080/v1';
-  url= 'http://104.236.84.230:7080/v1'
+  url= 'http://localhost:7080/v1';
+  //url= 'http://104.236.84.230:7080/v1'
 
   constructor(private http: Http){}
 

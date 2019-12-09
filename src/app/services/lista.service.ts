@@ -8,20 +8,21 @@ import { ResponseContentType } from '@angular/http';
 
 @Injectable()
 export class ListaService {
-
+  url= 'http://localhost:7080/v1';
+  //url= 'http://104.236.84.230:7080/v1'
   constructor(private http: Http) { }
 
 
 
   obtenerFactura(rfc)  {
-    return this.http.get(`http://104.236.84.230:7080/v1/users/${rfc}`)
+    return this.http.get(`${this.url}/users/${rfc}`)
     .map(res =>  {
       console.log(res)
       return res.json()})
 
   }
   obtenerFacturaUnica(file) {
-    return this.http.get(`http://104.236.84.230:7080/v1/file/${file}`)
+    return this.http.get(`${this.url}/file/${file}`)
     .map(res =>  {
       return res.json()})
   }
@@ -40,7 +41,7 @@ export class ListaService {
 
     dowloadUniqueXML(file){
       let options = new RequestOptions({responseType: ResponseContentType.Blob });
-      return this.http.get(`http://104.236.84.230:7080/v1/file/xml/${file}/download`,options)
+      return this.http.get(`${this.url}/file/xml/${file}/download`,options)
         .map( res =>  {
           return res.blob()})
     }
